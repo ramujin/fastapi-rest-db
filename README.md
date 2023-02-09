@@ -19,11 +19,13 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
     echo "MYSQL_PASSWORD=PASSWORD" >> credentials.env
     ```
 
-2. If you have Docker installed, run the following command to start up a MySQL server (ignore this step if you already have MySQL installed and modify the `credentials.env` file to match your database credentials!)
+2. If you have Docker installed, run the following command to start up a MySQL server (ignore this step if you already have MySQL installed and modify the `credentials.env` file to match your database credentials!). Run the command in a separate terminal window as it will lock up the window for logging.
 
     ```bash
-    docker compose up --build
+    docker compose up --build &
     ```
+
+    Just closing the terminal will not stop the database server. In order to it, you must issue the command `docker-compose down` when you are finished.
 
 3. Create a Python virtual environment
 

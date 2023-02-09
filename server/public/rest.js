@@ -21,66 +21,89 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  // Handle POST Requests
-  let form = document.querySelector('form');
+  // References to frequently accessed elements
+  let main = document.querySelector('main');
   let table = document.querySelector('.table');
   let template = document.querySelector('#new_row');
+  let add_form = document.querySelector('form[name=add_user]');
+  let edit_form = document.querySelector('form[name=edit_user]');
 
-  form.addEventListener('submit', (event) => {
+  //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  // Handle POST Requests
+  add_form.addEventListener('submit', (event) => {
     // Stop the default form behavior
     event.preventDefault();
 
     // Grab the needed form fields
-    const action = form.getAttribute('action');
-    const method = form.getAttribute('method');
-    const data = Object.fromEntries(new FormData(form).entries());
+    const action = add_form.getAttribute('action');
+    const method = add_form.getAttribute('method');
+    const data = Object.fromEntries(new FormData(add_form).entries());
 
     // Submit the POST request
-    server_request(action, data, method, function(response) {
+    server_request(action, data, method, (response) => {
       // Add the template row content to the table
       table.insertAdjacentHTML('beforeend', template.innerHTML);
 
       // Update the content of the newly added row
       let row = table.lastElementChild;
+      row.dataset.id = response['id'];
       let columns = row.querySelectorAll('span');
       columns[0].innerText = response['id'];
       columns[1].innerText = response['first_name'];
       columns[2].innerText = response['last_name'];
-      columns[3].querySelector('a').href = '/users/' + response['id'];
-      columns[4].querySelector('a').href = '/users/' + response['id'];
+
+      // Clear the input form
+      let inputs = add_form.querySelectorAll('input');
+      inputs[0].value = '';
+      inputs[1].value = '';
     });
   });
 
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // Handle PUT and DELETE Requests
-  table.addEventListener('click', (event) => {
-    if(event.target.tagName == 'A') {
-      event.preventDefault();
+  main.addEventListener('click', (event) => {
 
-      // Submit the request
-      action = event.target.dataset.action;
-      if(action == 'update') {
-        alert("Not implemented yet!");
+    // Open edit form
+    if(event.target.classList.contains('edit')) {
+      main.dataset.mode = 'editing';
 
-        // TODO: The UI needs to be implemented to display an edit form first...
+      let row = event.target.closest('.row');
+      edit_form.querySelector('input[name=first_name]').value = row.children[1].innerText.trim();
+      edit_form.querySelector('input[name=last_name]').value = row.children[2].innerText.trim();
+      edit_form.dataset.id = row.dataset.id;
+    }
 
-        // data = {'first_name': 'Tom', 'last_name': 'Jones'};
-        // server_request(event.target.href, data, 'PUT', function(response) {
-        //   // If successful, delete the row
-        //   if(response.success) {
-        //     location.reload();
-        //   }
-        // });
+    // Close edit form
+    if(event.target.classList.contains('cancel_button')) {
+      main.dataset.mode = 'viewing';
+    }
 
-      }
-      else if (action == 'delete') {
-        server_request(event.target.href, {}, 'DELETE', function(response) {
-          // If successful, delete the row
-          if(response.success) {
-            event.target.closest('.row').remove();
-          }
-        });
-      }
+    // Submit PUT request from the edit form
+    if(event.target.classList.contains('save_button')) {
+      const first_name = edit_form.querySelector('input[name=first_name]').value;
+      const last_name = edit_form.querySelector('input[name=last_name]').value;
+      const id = edit_form.dataset.id;
+      let data = {'first_name': first_name, 'last_name': last_name};
+
+      server_request(`/users/${id}`, data, 'PUT', function(response) {
+        if(response.success) {
+          let row = table.querySelector(`.row[data-id='${id}']`);
+          row.children[1].innerText = first_name;
+          row.children[2].innerText = last_name;
+          main.dataset.mode = 'viewing';
+        }
+      });
+    }
+
+    // Submit DELETE request and delete the row if successful
+    if(event.target.classList.contains('delete')) {
+      let row = event.target.closest('.row');
+      server_request(`/users/${row.dataset.id}`, {}, 'DELETE', function(response) {
+        if(response.success) {
+          row.remove();
+        }
+      });
     }
   });
+
 });

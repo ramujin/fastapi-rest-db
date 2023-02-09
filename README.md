@@ -8,16 +8,16 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
 
 ## Usage
 
-1. Create database credentials (**specify your own user and password!**)
+1. Create database credentials (specify your own **USERNAME** and **PASSWORD**!)
 
     ```bash
     echo "MYSQL_HOST=localhost" > credentials.env
     echo "MYSQL_DATABASE=ece140" >> credentials.env
-    echo "MYSQL_USER=**[USERNAME]**" >> credentials.env
-    echo "MYSQL_PASSWORD=**[PASSWORD]**" >> credentials.env
+    echo "MYSQL_USER=USERNAME" >> credentials.env
+    echo "MYSQL_PASSWORD=PASSWORD" >> credentials.env
     ```
 
-2. If you have Docker installed, run the following command to start up a MySQL server (please ignore this step if you already have MySQL installed!)
+2. If you have Docker installed, run the following command to start up a MySQL server (ignore this step if you already have MySQL installed and modify the `credentials.env` file to match your database credentials!)
 
     ```bash
     docker compose up --build

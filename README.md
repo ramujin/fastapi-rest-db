@@ -2,6 +2,8 @@
 
 This repo is a full-stack app using the [FastAPI web framework](https://fastapi.tiangolo.com), MySQL for a database, and REST to interact with a simple users table. You may install MySQL natively or use the included Docker file to create a database in a containter. The `init-db.sql` defines a simple schema for use with the example.
 
+![Screenshot](screenshot.png)
+
 ## Prerequesites
 
 You just need to have Python 3.7+ installed (3.10+ for the simplified typehinting).

@@ -60,7 +60,7 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
     uvicorn main:app --reload
     ```
 
-7. Note that there is a `main-pydantic.py` implementation as well. Instead of using the `request` object directly, this example uses the helpful Pydantic models to reduce cognitive load, so feel free to check that one out as well. Usage is exactly the same!
+7. If you prefer, there is a `main-pydantic.py` implementation as well. Instead of using the `request` object directly, this example uses the helpful Pydantic models to reduce cognitive load, so feel free to check that one out as well. Usage is exactly the same!
 
     ```bash
     cd server

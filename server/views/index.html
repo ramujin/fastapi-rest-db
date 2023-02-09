@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>ECE 140A Rest DB</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel='stylesheet' type='text/css' href='public/rest.css'>
+    <script src="public/rest.js" defer></script>
+  </head>
+  <body>
+
+    <h1>Our All-Star Cast</h1>
+
+    <main>
+      <div class='table'>
+        <div class='header'>
+          <span> ID </span>
+          <span> First Name </span>
+          <span> Last Name </span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Rows will dynamically populate -->
+        {# loop through the records and render them #}
+        {% for user in users %}
+        <div class='row'>
+          <span> {{ user[0] }} </span>
+          <span> {{ user[1] }} </span>
+          <span> {{ user[2] }} </span>
+          <span> <a href='/user/{{user[0]}}' data-action='update'>&#x270e;</a> </span>
+          <span> <a href='/user/{{user[0]}}' data-action='delete'>&#x232b;</a> </span>
+        </div>
+        {% endfor %}
+
+      </div>
+   </main>
+
+   <form action='/user' method='POST'>
+    <div class='add_row'>
+      <input type='text' name='first_name' placeholder='First Name' autofocus>
+      <input type='text' name='last_name' placeholder='Last Name'>
+      <input type='submit' value='Add New User'>
+    </div>
+  </form>
+
+   <template id='new_row'>
+    <div class='row'>
+      <span> </span>
+      <span> </span>
+      <span> </span>
+      <span> <a href="" data-action='update'>&#x270e;</a> </span>
+      <span> <a href="" data-action='delete'>&#x232b;</a> </span>
+    </div>
+  </template>
+
+  </body>
+
+</html>

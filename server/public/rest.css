@@ -1,0 +1,55 @@
+body {
+  background: #222;
+  margin: 2rem;
+  color: #eee;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+}
+
+.table {
+  margin-top: 6rem;
+  box-shadow: 0 0 1rem rgba(255,255,255,0.15);
+}
+
+.table .header {
+  display: grid;
+  grid-template-columns: 5fr 10fr 10fr 1fr 1fr;
+  background-color: #449ee3;
+  color: #ffffff;
+  text-align: left;
+  padding: 1rem 1rem;
+}
+
+.table .row {
+  display: grid;
+  grid-template-columns: 5fr 10fr 10fr 1fr 1fr;
+  background-color: #555555;
+  padding: 0.5rem 1rem;
+
+}
+
+.table .row:nth-child(odd) {
+  background-color: #454545;
+}
+
+.add_row {
+  margin-top: 0.25rem;
+  display:block;
+  padding: 1rem;
+  background-color: #333;
+}
+
+.add_row input {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.add_row input[type=submit] {
+  background-color: #449ee3;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}

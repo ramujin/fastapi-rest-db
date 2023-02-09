@@ -25,7 +25,7 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
     docker compose up --build &
     ```
 
-    Just closing the terminal will not stop the database server. In order to stop it, you must issue the command `docker-compose down` when you are finished.
+    **Note:** Just closing the terminal will not stop the database server. In order to stop it, you must issue the command `docker-compose down` when you are finished.
 
 3. Create a Python virtual environment
 

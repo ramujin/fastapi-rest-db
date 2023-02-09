@@ -1,4 +1,4 @@
-# FastAPI Javascript Starter
+# FastAPI Full-Stack REST Demo
 
 This repo is a full-stack app using the [FastAPI web framework](https://fastapi.tiangolo.com), MySQL for a database, and REST to interact with a simple users table. You may install MySQL natively or use the included Docker file to create a database in a containter. The `init-db.sql` defines a simple schema for use with the example.
 
@@ -13,8 +13,8 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
     ```bash
     echo "MYSQL_HOST=localhost" > credentials.env
     echo "MYSQL_DATABASE=ece140" >> credentials.env
-    echo "MYSQL_USER=" >> credentials.env
-    echo "MYSQL_PASSWORD=" >> credentials.env
+    echo "MYSQL_USER=**[USERNAME]**" >> credentials.env
+    echo "MYSQL_PASSWORD=**[PASSWORD]**" >> credentials.env
     ```
 
 2. If you have Docker installed, run the following command to start up a MySQL server (please ignore this step if you already have MySQL installed!)

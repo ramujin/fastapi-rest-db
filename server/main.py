@@ -80,9 +80,18 @@ def get_home(request:Request) -> HTMLResponse:
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # RESTful User Routes
 
+# GET /users
+# Used to query a collection of all users
+@app.get('/users')
+def get_users() -> dict:
+  users = db_select_users()
+  keys = ['id', 'first_name', 'last_name']
+  users = [dict(zip(keys, user)) for user in users]
+  return {"users": users}
+
 # GET /user
-# Used to query a single user RESTfully
-@app.get('/user/{user_id}')
+# Used to query a single user
+@app.get('/users/{user_id}')
 def get_user(user_id:int) -> dict:
   user = db_select_users(user_id)
   response = {} if user==None else {'id':user[0], 'first_name':user[1], 'last_name':user[2]}
@@ -90,7 +99,7 @@ def get_user(user_id:int) -> dict:
 
 # POST /user
 # Used to create a new user
-@app.post("/user")
+@app.post("/users")
 async def post_user(request:Request) -> dict:
   data = await request.json()
   first_name, last_name = data['first_name'], data['last_name']
@@ -100,14 +109,14 @@ async def post_user(request:Request) -> dict:
   return get_user(new_id)
 
 # PUT /user
-@app.put('/user/{user_id}')
+@app.put('/users/{user_id}')
 async def put_user(user_id:int, request:Request) -> dict:
   data = await request.json()
   first_name, last_name = data['first_name'], data['last_name']
   return {'success': db_update_user(user_id, first_name, last_name)}
 
 # DELETE /user
-@app.delete('/user/{user_id}')
+@app.delete('/users/{user_id}')
 def delete_user(user_id:int) -> dict:
   return {'success': db_delete_user(user_id)}
 

@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
       columns[0].innerText = response['id'];
       columns[1].innerText = response['first_name'];
       columns[2].innerText = response['last_name'];
-      columns[3].querySelector('a').href = '/user/' + response['id'];
-      columns[4].querySelector('a').href = '/user/' + response['id'];
+      columns[3].querySelector('a').href = '/users/' + response['id'];
+      columns[4].querySelector('a').href = '/users/' + response['id'];
     });
   });
 

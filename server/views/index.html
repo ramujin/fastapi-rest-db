@@ -29,15 +29,15 @@
           <span> {{ user[0] }} </span>
           <span> {{ user[1] }} </span>
           <span> {{ user[2] }} </span>
-          <span> <a href='/user/{{user[0]}}' data-action='update'>&#x270e;</a> </span>
-          <span> <a href='/user/{{user[0]}}' data-action='delete'>&#x232b;</a> </span>
+          <span> <a href='/users/{{user[0]}}' data-action='update'>&#x270e;</a> </span>
+          <span> <a href='/users/{{user[0]}}' data-action='delete'>&#x232b;</a> </span>
         </div>
         {% endfor %}
 
       </div>
    </main>
 
-   <form action='/user' method='POST'>
+   <form action='/users' method='POST'>
     <div class='add_row'>
       <input type='text' name='first_name' placeholder='First Name' autofocus>
       <input type='text' name='last_name' placeholder='Last Name'>

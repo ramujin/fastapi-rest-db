@@ -1,20 +1,20 @@
-CREATE DATABASE IF NOT EXISTS ece140;
+create database if not exists ece140;
 
-USE ece140;
+use ece140;
 
 -- DUMP EVERYTHING... YOU REALLY SHOULDN'T DO THIS!
-DROP TABLE IF EXISTS users;
+drop table if exists users;
 
-CREATE TABLE IF NOT EXISTS users (
-  id          integer  AUTO_INCREMENT PRIMARY KEY,
-  first_name  VARCHAR(30) NOT NULL,
-  last_name   VARCHAR(30) NOT NULL,
-  created_at  TIMESTAMP
+create table if not exists users (
+  id         integer auto_increment primary key,
+  first_name varchar(30) not null,
+  last_name  varchar(30) not null,
+  created_at timestamp
 );
 
-INSERT INTO users (first_name, last_name, created_at) VALUES
-  ("Zendaya", "", CURRENT_TIMESTAMP),
-  ("Tom", "Holland", CURRENT_TIMESTAMP),
-  ("Tobey", "Maguire", CURRENT_TIMESTAMP),
-  ("Andrew", "Garfield", CURRENT_TIMESTAMP)
+insert into users (first_name, last_name, created_at) values
+  ("Zendaya", "", current_timestamp),
+  ("Tom", "Holland", current_timestamp),
+  ("Tobey", "Maguire", current_timestamp),
+  ("Andrew", "Garfield", current_timestamp)
 ;

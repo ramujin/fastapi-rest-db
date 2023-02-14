@@ -52,10 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
       columns[1].innerText = response['first_name'];
       columns[2].innerText = response['last_name'];
 
-      // Clear the input form
+      // Clear the input form and bring focus to the first field again
       let inputs = add_form.querySelectorAll('input');
       inputs[0].value = '';
       inputs[1].value = '';
+      inputs[0].focus();
     });
   });
 

@@ -38,12 +38,12 @@
           <!-- Rows will dynamically populate -->
           {# loop through the records and render them #}
           {% for user in users %}
-          <div class='row' data-id='{{user[0]}}'>
+          <div class='row' data-id='{{ user[0] }}'>
             <span> {{ user[0] }} </span>
             <span> {{ user[1] }} </span>
             <span> {{ user[2] }} </span>
-            <span class='edit' title='Edit User'> &#x270e; </span>
-            <span class='delete' title='Delete User'> &#x232b; </span>
+            <span class='edit_button' title='Edit User'> &#x270e; </span>
+            <span class='delete_button' title='Delete User'> &#x232b; </span>
           </div>
           {% endfor %}
         </div>
@@ -64,8 +64,8 @@
       <span> </span>
       <span> </span>
       <span> </span>
-      <span class='edit' title='Edit User'> &#x270e; </span>
-      <span class='delete' title='Delete User'> &#x232b; </span>
+      <span class='edit_button' title='Edit User'> &#x270e; </span>
+      <span class='delete_button' title='Delete User'> &#x232b; </span>
     </div>
   </template>
 

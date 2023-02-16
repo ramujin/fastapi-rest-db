@@ -7,13 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
       credentials: 'same-origin',
       method: verb,
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
+      headers: {'Content-Type': 'application/json'}
     })
     .then(response => response.json())
-    .then(function(response) {
+    .then(response => {
       if(callback)
         callback(response);
     })
@@ -65,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   main.addEventListener('click', (event) => {
 
     // Open edit form
-    if(event.target.classList.contains('edit')) {
+    if(event.target.classList.contains('edit_button')) {
       main.dataset.mode = 'editing';
 
       let row = event.target.closest('.row');
@@ -97,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Submit DELETE request and delete the row if successful
-    if(event.target.classList.contains('delete')) {
+    if(event.target.classList.contains('delete_button')) {
       let row = event.target.closest('.row');
       server_request(`/users/${row.dataset.id}`, {}, 'DELETE', function(response) {
         if(response.success) {

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   // References to frequently accessed elements
   let main = document.querySelector('main');
-  let table = document.querySelector('.table');
+  let table = document.querySelector('.grid_table');
   let template = document.querySelector('#new_row');
   let add_form = document.querySelector('form[name=add_user]');
   let edit_form = document.querySelector('form[name=edit_user]');

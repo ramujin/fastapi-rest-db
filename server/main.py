@@ -18,9 +18,9 @@ db_pass = os.environ['MYSQL_PASSWORD']
 db_name = os.environ['MYSQL_DATABASE']
 
 app = FastAPI()                                   # Specify the "app" that will run the routing
-views = Jinja2Templates(directory="views")        # Specify where the HTML files are located
-static_files = StaticFiles(directory="public")    # Specify where the static files are located
-app.mount("/public", static_files, name="public") # Mount the static files directory to /public
+views = Jinja2Templates(directory='views')        # Specify where the HTML files are located
+static_files = StaticFiles(directory='public')    # Specify where the static files are located
+app.mount('/public', static_files, name='public') # Mount the static files directory to /public
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # Define helper functions for CRUD operations
@@ -70,12 +70,12 @@ def db_delete_user(user_id:int) -> bool:
 
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# Home route to load the main page in a templatized fashion
+
 # GET /
-# Home route to load the main page
-@app.get("/", response_class=HTMLResponse)
+@app.get('/', response_class=HTMLResponse)
 def get_home(request:Request) -> HTMLResponse:
-  with open("views/index.html") as html:
-    return views.TemplateResponse("index.html", {"request":request, "users":db_select_users()})
+  return views.TemplateResponse('index.html', {'request':request, 'users':db_select_users()})
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # RESTful User Routes
@@ -89,7 +89,7 @@ def get_users() -> dict:
   users = [dict(zip(keys, user)) for user in users]
   return {"users": users}
 
-# GET /user
+# GET /users/{user_id}
 # Used to query a single user
 @app.get('/users/{user_id}')
 def get_user(user_id:int) -> dict:
@@ -97,7 +97,7 @@ def get_user(user_id:int) -> dict:
   response = {} if user==None else {'id':user[0], 'first_name':user[1], 'last_name':user[2]}
   return response
 
-# POST /user
+# POST /users
 # Used to create a new user
 @app.post("/users")
 async def post_user(request:Request) -> dict:
@@ -108,14 +108,14 @@ async def post_user(request:Request) -> dict:
   # Send the new record back
   return get_user(new_id)
 
-# PUT /user
+# PUT /users/{user_id}
 @app.put('/users/{user_id}')
 async def put_user(user_id:int, request:Request) -> dict:
   data = await request.json()
   first_name, last_name = data['first_name'], data['last_name']
   return {'success': db_update_user(user_id, first_name, last_name)}
 
-# DELETE /user
+# DELETE /users/{user_id}
 @app.delete('/users/{user_id}')
 def delete_user(user_id:int) -> dict:
   return {'success': db_delete_user(user_id)}

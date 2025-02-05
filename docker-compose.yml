@@ -1,12 +1,10 @@
-version: '3'
-
 services:
 
   mysql-server:
     image: mysql:latest
     restart: always
     env_file:
-      ./credentials.env
+      ./.env
     ports:
       - 3306:3306
     command: --init-file /init-db.sql       # Initialize the database – uncommenting this will wipe everything from the DB!

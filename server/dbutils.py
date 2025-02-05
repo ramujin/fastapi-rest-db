@@ -6,7 +6,7 @@ from dotenv import load_dotenv                    # Used to read the credentials
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # Configuration
-load_dotenv('../credentials.env')                 # Read in the environment variables for MySQL
+load_dotenv('../.env', override=True)             # Read in the environment variables for MySQL
 db_host = os.environ['MYSQL_HOST']
 db_user = os.environ['MYSQL_USER']
 db_pass = os.environ['MYSQL_PASSWORD']

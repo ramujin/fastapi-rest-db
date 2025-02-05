@@ -13,17 +13,17 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
 1. Create database credentials (specify your own **USERNAME**, **PASSWORD**, and **ROOT_PASSWORD**!)
 
     ```bash
-    echo "MYSQL_HOST=localhost" > credentials.env
-    echo "MYSQL_DATABASE=ece140" >> credentials.env
-    echo "MYSQL_USER=USERNAME" >> credentials.env
-    echo "MYSQL_PASSWORD=PASSWORD" >> credentials.env
-    echo "MYSQL_ROOT_PASSWORD=ROOT_PASSWORD" >> credentials.env
+    echo "MYSQL_HOST=localhost" > .env
+    echo "MYSQL_DATABASE=ece140" >> .env
+    echo "MYSQL_USER=USERNAME" >> .env
+    echo "MYSQL_PASSWORD=PASSWORD" >> .env
+    echo "MYSQL_ROOT_PASSWORD=ROOT_PASSWORD" >> .env
     ```
 
-2. If you have Docker installed, run the following command to start up a MySQL server (ignore this step if you already have MySQL installed and modify the `credentials.env` file to match your database credentials!). Run the command in a separate terminal window as it will lock up the window for logging.
+2. If you have Docker installed, run the following command to start up a MySQL server (ignore this step if you already have MySQL installed and modify the `.env` file to match your database credentials!). Run the command in a separate terminal window as it will lock up the window for logging.
 
     ```bash
-    docker compose up --build &
+    docker compose up --build -d
     ```
 
     **Note:** Just closing the terminal will not stop the database server. In order to stop it, you must issue the command `docker-compose down` when you are finished.
@@ -31,13 +31,13 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
 3. Create a Python virtual environment
 
     ```bash
-    python3 -m venv env
+    python3 -m venv envpy
     ```
 
 4. Start the virtual environment
 
     ```bash
-    source env/bin/activate
+    source envpy/bin/activate
     ```
 
 5. Install dependencies

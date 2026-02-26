@@ -6,7 +6,7 @@ This repo is a full-stack app using the [FastAPI web framework](https://fastapi.
 
 ## Prerequesites
 
-You just need to have Python 3.7+ installed (3.10+ for the simplified typehinting).
+You just need to have Python 3.10+ installed.
 
 ## Usage
 
@@ -26,51 +26,30 @@ You just need to have Python 3.7+ installed (3.10+ for the simplified typehintin
     docker compose up --build -d
     ```
 
-    **Note:** Just closing the terminal will not stop the database server. In order to stop it, you must issue the command `docker-compose down` when you are finished.
+    **Note:** Just closing the terminal will not stop the database server. In order to stop it, you must issue the command `docker compose down` when you are finished.
 
-3. Create a Python virtual environment
-
-    ```bash
-    python3 -m venv envpy
-    ```
-
-4. Start the virtual environment
+3. Install `uv` (one-time)
 
     ```bash
-    source envpy/bin/activate
+    brew install uv
     ```
 
-5. Install dependencies
+    If you don’t use Homebrew, see https://docs.astral.sh/uv/getting-started/ for alternatives.
+
+4. Create a virtual environment and sync dependencies
 
     ```bash
-    pip install -U pip
-    pip install -r requirements.txt
+    uv sync
     ```
 
-6. Run the server
+5. Run the server (recommended: single worker)
 
     ```bash
-    cd server
-    python main.py
+    uv run server/main.py
     ```
 
-    or
-
-    ```bash
-    cd server
-    uvicorn main:app --reload
-    ```
-
-7. If you prefer, there is a `main-pydantic.py` implementation as well. Instead of using the `request` object directly, this example uses the helpful Pydantic models to reduce cognitive load, so feel free to check that one out as well. Usage is exactly the same!
-
-    ```bash
-    cd server
-    python main-pydantic.py
-    ```
-
-    or
-
-    ```bash
-    cd server
-    uvicorn main-pydantic:app --reload
-    ```
+## Persistence
+- The server interacts with a MySQL database to persist user data.
+- The database connection details are specified in the `.env` file.
+- The `init-db.sql` file can be used to initialize the database schema if needed.
+- The MySQL database will persist, even if the server is stopped because we volume mount the database data to the host machine in the `docker-compose.yml` file.

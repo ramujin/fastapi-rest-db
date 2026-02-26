@@ -1,5 +1,7 @@
 __pycache__
 .DS_Store
-envpy
-database/mysql-db
+Thumbs.db
 .env
+.venv
+database/mysql-db
+.ruff_cache

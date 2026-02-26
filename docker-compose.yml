@@ -4,14 +4,15 @@ services:
     image: mysql:latest
     restart: always
     env_file:
-      ./.env
+      .env
     ports:
       - 3306:3306
-    command: --init-file /init-db.sql       # Initialize the database – uncommenting this will wipe everything from the DB!
+    command: --init-file /init-db.sql       # initialize the database – uncommenting this will wipe everything from the DB!
     volumes:
       - ./database/init-db.sql:/init-db.sql # map the init-db.sql file into Docker
-      - ./database/mysql-db:/var/lib/mysql  # persist even when container is stopped!
+      - ./database/mysql-db:/var/lib/mysql  # specify a bind mount folder to persist the files even when container is stopped!
     container_name: 140-db-server
 
+# specify a volume mount that would be used across services
 volumes:
   mysql-db:
